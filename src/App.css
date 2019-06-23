@@ -1,0 +1,6 @@
+.App {
+  display: grid;
+  text-align: center;
+  grid-gap: 29px 100px;
+  padding: 100px;
+}
