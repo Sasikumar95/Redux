@@ -1,11 +1,11 @@
-// import loggedReducer from "./islogged";
-// import conuterReducer from "./counter";
-// import {combineReducers} from "redux"
+import loggedReducer from "./islogged";
+import conuterReducer from "./counter";
+import {combineReducers} from "redux"
 
 
-// const allReducers= combineReducers({
-//     counter:conuterReducer,
-//     islogged:loggedReducer
-// });
+const allReducers= combineReducers({
+    counter:conuterReducer,
+    islogged:loggedReducer
+});
 
-// export default allReducers;
+export default allReducers;
