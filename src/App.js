@@ -1,70 +1,74 @@
-import React from "react";
-import "./App.css";
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello World</h1>
-      <h1>{React.version}</h1>
-      {/* // table */}
-      <div className="p1020">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>username</th>
-              <th>emailid</th>
-              <th>phoneno</th>
-              <th>address</th>
-              <th>company</th>
-            </tr>
-            ; })}
-          </thead>
-          <tbody>
-            <tr key={singleData.id}>
-              <td>{singleData.id}</td>
-              <td>{singleData.name}</td>
-              <td>{singleData.username}</td>
-              <td>{singleData.email}</td>
-              <td>{singleData.phone}</td>
-              <td>{singleData.address.city}</td>
-              <td>{singleData.company.name}</td>
-            </tr>
-          </tbody>
-        </table>
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      serverData:[],
+      title:"",
+      body:""
+    };
+    this.onChange=this.onChange.bind(this);
+    this.onSubmit=this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(res => res.json())
+      .then(data => 
+        this.setState({
+          serverData: data
+        }));
+  }
+
+  onChange(e){
+    this.setState({
+      [e.target.name]:e.target.value
+    })
+  }
+
+
+  onSubmit(e){
+    e.preventDefault();
+
+    const post={
+      title:this.state.title,
+      body:this.state.body
+    }
+    
+    fetch("https://jsonplaceholder.typicode.com/posts",{
+      method:"POST",
+      headers:{
+        "context-type":"application/json"
+      },
+      body:JSON.stringify(post)
+    })
+    .then(res => res.json())
+    .then(data =>console.log(data) )
+  }
+
+
+  render() {
+    return (
+      <div>
+             <h1>Hello world</h1>
+             <form onSubmit={this.onSubmit}>
+             Title:  <input type="text" name="title" onChange={this.onChange} value={this.state.title}/>
+               <br/>
+             Discription:  <textarea name="body" onChange={this.onChange} value={this.state.body} />
+             <button type="submit">
+               Submit
+             </button>
+             </form>
+             
+             {this.state.serverData.map(item => (
+              <div key={item.id}>
+            <h1>{item.title}</h1>
+            <p>{item.body}</p>
+          </div>)
+          )}
       </div>
-    </div>
-  );
+    );
+  }
 }
-
 export default App;
-
-
-// .p1020 {
-//   padding: 10px 20px;
-// }
-
-// .table {
-//   width: 100%;
-//   border: 1px solid #d3d3d3;
-//   border-collapse: collapse;
-// }
-//    th {
-//   padding: 10px;
-//   font-weight: 700 !important;
-//   font-size: 16px;
-//   border: 1px solid #000000;
-// }
-// tr{
-//   border: 1px solid #000000;
-// }
-
-// .table td {
-//   font-size: 14px;
-//   color: #222;
-//   border: 1px solid #000000;
-  
-// }
-
-
-

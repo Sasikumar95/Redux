@@ -26,7 +26,8 @@
     "react": "^15.6.2",
     "react-dom": "^15.5.4",
     "react-redux": "^7.1.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",

@@ -1,11 +1,7 @@
-import loggedReducer from "./islogged";
-import conuterReducer from "./counter";
-import {combineReducers} from "redux"
+import combineReducers from 'redux';
+import postReducer from './postReducer'
 
-
-const allReducers= combineReducers({
-    counter:conuterReducer,
-    islogged:loggedReducer
-});
-
-export default allReducers;
+  export default combineReducers({
+    posts:postReducer
+})
+ 
