@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-
+import {connect} from "react-redux";
+import {fetchPost} from "../src/actions/postActions"
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      serverData:[],
       title:"",
       body:""
     };
@@ -12,13 +12,8 @@ class App extends Component {
     this.onSubmit=this.onSubmit.bind(this);
   }
 
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.json())
-      .then(data => 
-        this.setState({
-          serverData: data
-        }));
+  componentDidMount(){
+    this.props.fetchPost();
   }
 
   onChange(e){
@@ -71,4 +66,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default connect(null,{fetchPost})(App);
